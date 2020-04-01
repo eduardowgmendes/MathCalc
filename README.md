@@ -13,6 +13,7 @@ Neste repositório estudarei este projeto nos mínimos detalhes para compreender
 No final, todo o conteúdo estará disponível aqui passo a passo onde haverá um índice com cada capítulo. 
 
 ## Índice do conteúdo
+* [Implementando o `ViewPager` do Pad Numérico da Calculadora](https://github.com/eduardowgmendes/android-calculator-reverse-engineering/blob/master/chapters/calculator-pad-view-pager.md#implementando-o-viewpager-do-pad-num%C3%A9rico-da-calculadora)
 
 ## Estrutura do repositório 
 Os diretórios `/chapters` terão todo o conteúdo em formato markdown e o diretório `/images` conterá todas as imagens ilustrativas para auxiliar de forma didática a compreensão de alguns pontos específicos desse projeto. 
