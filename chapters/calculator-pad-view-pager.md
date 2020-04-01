@@ -148,7 +148,13 @@ Como foi visto no método `setImportantForAccessibility(int mode)` é possível 
 * `public static final int IMPORTANT_FOR_ACCESSIBILITY_AUTO` - O sistema automaticamente determina quando uma view é importante para acessibilidade 
 
 ### PageTransformer
-Para realizar a ação de sobrepor o painél numérico padrão é utilizado um `PageTransformer`. Um `PageTransformer` pode personalizar a animação quando uma página avançado é deslizado.  
+Para realizar a ação de sobrepor o painél numérico padrão é utilizado um `PageTransformer`. Um `PageTransformer` pode personalizar a animação quando uma página é deslizada. Essa interface expõe apenas um método `transformPage()`. Em cada ponto da transição da tela, esse método será chamado uma vez para cada página visível (geralmente há apenas uma página visível) e para páginas adjacentes fora da tela. Por exemplo, se a página três estiver visível e o usuário arrastar para a página quatro, transformPage() será chamado para as páginas dois, três e quatro em cada etapa do gesto.
+
+Na sua implementação do transformPage(), você poderá criar animações de deslize personalizadas determinando quais páginas precisam ser transformadas com base na posição da página na tela, que é conseguida a partir do parâmetro position do método transformPage().
+
+O parâmetro position indica onde uma determinada página está localizada em relação ao centro da tela. Esse parâmetro é uma propriedade dinâmica que muda à medida que o usuário rola pelas páginas. Quando uma página preenche a tela, o valor de posição dela é 0. Quando uma página é arrastada levemente para o lado direito da tela, o valor de posição dela é 1. Se o usuário rolar metade do caminho entre as páginas um e dois, a página um terá uma posição de -0,5 e a página dois terá uma posição de 0,5. Com base na posição das páginas na tela, você poderá criar animações de deslize personalizadas definindo propriedades da página com métodos como setAlpha(), setTranslationX() ou setScaleY().
+
+Quando você tiver uma implementação de um `PageTransformer`, chame `setPageTransformer()` com essa implementação para aplicar as animações personalizadas. É desse modo que obtemos uma animação de deslizar exclusiva e bem útil em nosso painél avançado.  
 ```java
   private final PageTransformer mPageTransformer = new PageTransformer() {
         @Override
