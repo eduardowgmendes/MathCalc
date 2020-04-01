@@ -1,3 +1,5 @@
+![Pad Numérico Calculadora](https://raw.githubusercontent.com/eduardowgmendes/android-calculator-reverse-engineering/master/images/app-calculator-pad.png)
+
 ## Implementando o ViewPager do Pad Numérico da Calculadora
 Este é um dos elementos mais interessantes de todo o projeto quando o assunto é UI. Trata-se do pad/teclado onde se encontram todos os botões numéricos e botões de funções matemáticas avançadas. O mais interessante é a interação responsável por exibir o painel de operações avançadas que fica à direita da tela (quando o dispositivo se encontra na orientação retrato), onde você desliza o painél para a esquerda e são exibidos todos os botões pertinentes às operações matemáticas mais avançadas como seno, coseno, mudança de graus para radianos e etc. O painél numérico padrão fica esmaecido e sobreposto por esse painél avançado e se desejar voltar a vê-lo, basta deslizar novamente o painel avançado para a posição original. Todo esse comportamento é alcançado graças a um componente chamado de `ViewPager`. 
 
