@@ -140,18 +140,28 @@ private final OnPageChangeListener mOnPageChangeListener = new SimpleOnPageChang
     };
 ```
 ### Constantes de acessibilidade da classe `View`
-Como foi visto no método `setImportantForAccessibility(int mode)` é possível configurar uma `view` para ser lida por mecanismos de acessibilidade utilizando uma das quatro constantes disponíveis para essa finalidade: 
+Como foi visto no método `setImportantForAccessibility(int mode)` é possível configurar uma `view` para ser lida por mecanismos de acessibilidade utilizando uma das constantes disponíveis para essa finalidade: 
 
-* `public static final int IMPORTANT_FOR_ACCESSIBILITY_YES`
-A view é importante para acessibilidade e pode ser consultada por serviços de acessibilidade que lêem a tela. 
-* `public static final int IMPORTANT_FOR_ACCESSIBILITY_NO`
-O contrário da constante anterior 
-* `public static final int IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS`
-A view não é importante para acessibilidade nem nenhuma view descendentes 
-* `public static final int IMPORTANT_FOR_ACCESSIBILITY_AUTO`
-Automaticamente determina quando uma view é importante para autocompletagem 
+* `public static final int IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS` - A view não é importante para acessibilidade nem nenhuma view descendentes 
+* `public static final int IMPORTANT_FOR_ACCESSIBILITY_AUTO` - O sistema automaticamente determina quando uma view é importante para acessibilidade 
 
+**Nota**: Em versões futuras dessa calculadora esse painel avançado fica disposto acima do painel numérico padrão e não há essa interação de deslizar para a esquerda.   
 
-   
-
-**Nota**: Em versões futuras dessa calculadora esse painel avançado fica disposto acima do painel numérico padrão e não há essa interação de deslizar para a esquerda.     
+### PageTransformer
+Para realizar a ação de sobrepor o painél numérico padrão é utilizado um `PageTransformer`. Um `PageTransformer` pode personalizar a animação quando uma página avançado é deslizado.  
+```java
+  private final PageTransformer mPageTransformer = new PageTransformer() {
+        @Override
+        public void transformPage(View view, float position) {
+            if (position < 0.0f) {
+                // Pin the left page to the left side.
+                view.setTranslationX(getWidth() * -position);
+                view.setAlpha(Math.max(1.0f + position, 0.0f));
+            } else {
+                // Use the default slide transition when moving to the next page.
+                view.setTranslationX(0.0f);
+                view.setAlpha(1.0f);
+            }
+        }
+    };
+```  
