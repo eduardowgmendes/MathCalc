@@ -1,4 +1,4 @@
-## Android Calculator 
+## Math Calc Calculator 
 
 ![Android Calculator](https://raw.githubusercontent.com/eduardowgmendes/android-calculator-reverse-engineering/master/images/app-samples-i.png)
 
